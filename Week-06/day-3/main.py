@@ -36,7 +36,15 @@ elif "-l" in sys.argv:
             LoadedTaskIndex = str(LoadedTasks.index(task)+ 1)
             print(LoadedTaskIndex + " - " + task)
 elif "-r" in sys.argv:
-    TaskNumber = sys.argv[2] # Task number to be removed
-    LoadedTasks.pop(int(TaskNumber) - 1 ) #Remove the task from the LoadedTasks list
-    pickle.dump(LoadedTasks, open('tasks.txt', 'wb')) #Write again to file
-    #Add error catching
+    try:
+        TaskNumber = sys.argv[2] # Task number to be removed
+    except IndexError: # Add error catching
+        print("Unable to remove: no index provided")
+        exit()
+    try:
+        LoadedTasks.pop(int(TaskNumber) - 1)  # Remove the task from the LoadedTasks list
+        pickle.dump(LoadedTasks, open('tasks.txt', 'wb'))  # Write again to file
+    except IndexError:
+        print("Unable to remove: index is out of bound")
+    except ValueError:
+        print("Unable to remove: index is not a number")
