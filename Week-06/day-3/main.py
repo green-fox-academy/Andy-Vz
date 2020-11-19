@@ -32,4 +32,11 @@ elif "-l" in sys.argv:
     if not LoadedTasks: #If it's empty
         print("No todos for today! :)")
     else :
-        print(LoadedTasks)
+        for task in LoadedTasks:
+            LoadedTaskIndex = str(LoadedTasks.index(task)+ 1)
+            print(LoadedTaskIndex + " - " + task)
+elif "-r" in sys.argv:
+    TaskNumber = sys.argv[2] # Task number to be removed
+    LoadedTasks.pop(int(TaskNumber) - 1 ) #Remove the task from the LoadedTasks list
+    pickle.dump(LoadedTasks, open('tasks.txt', 'wb')) #Write again to file
+    #Add error catching
