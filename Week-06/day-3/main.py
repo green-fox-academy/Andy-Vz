@@ -67,3 +67,5 @@ elif "-c" in sys.argv:
         print("Unable to remove: index is out of bound")
     except ValueError:
         print("Unable to remove: index is not a number")
+else: #If none of the above conditions matched than the wrong argument must be provided
+    print("Unsupported argument")
